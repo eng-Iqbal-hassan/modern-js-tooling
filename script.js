@@ -1,3 +1,10 @@
+// import { addToCart, totalPrice as price, tq } from "./shoppingCart.js";
+// we can import all the variable in a single go by the following syntax
+import * as shoppingCart from './shoppingCart.js'
+// in this syntax, the object with name shoppingCart is created which contains all the variables of the imported file
+import add from './shoppingCart2.js'
+// this is default export and we can export it by any name and it is without curly braces
+
 // Lecture 3: 
 
 // Back in the days, we develop the project by writing one large script or script in multiple files. But now, we develop project in terms of modules and these modules can share data between them and we make our code more maintainable and organized.
@@ -54,6 +61,25 @@
 
 ///////////////////////////////
 
-// Lecture 5: 
+// Lecture 5: Exporting and importing in ES6
+console.log('importing module')
+// import './shoppingCart.js'; // this is the import of the module
+// import { addToCart } from "./shoppingCart.js"; // this is the import of variable from module
+// the error i face that we can not use the import statement outside the module 
+// so to achieve this thing we use type=module where the script is achieved in html
+// it has been observed that module code is run before any other code.
+// import code is executed first even i have written it after.
+// console.log(shippingCost);
+// uncaught reference error: variable is not defined
+// this variable is declared in other module so it has scope to that file only. and the error occur because this thing is not imported over there.
+// addToCart('bread',5);
+// console.log(`total price is ${price} and total quantity is ${tq}`)
+// we can change the name of variable imported from other file as mentioned above. even this thing can be done in exported file.
+shoppingCart.addToCart('bread',5);
+console.log(shoppingCart.totalPrice);
+console.log('cart',shoppingCart.cart) // we have exported cart where it is just an empty array if the export is just the copy of import then in the console there is only the empty array but now it is giving me one object with product bread and quantity 5 properties.
+
+add('garlic',10) // this result coming from default export.
+// imports are not the copy of export but it is the live connection with export file
 
 ///////////////////////////////
