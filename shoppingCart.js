@@ -3,6 +3,8 @@ console.log('exporting module')
 
 // lets define some variable
 
+// await fetch('https://jsonplaceholder.typicode.com/posts'); // this thing will block the EC not only in this module but also in the module in which it is imported
+
 const shippingCost = 10;
 export const cart= [];
 // all the variables declared over there have scope only in this file and unlike normal scripts they can not access directly into other file.

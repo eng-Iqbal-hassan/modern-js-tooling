@@ -83,3 +83,38 @@ add('garlic',10) // this result coming from default export.
 // imports are not the copy of export but it is the live connection with export file
 
 ///////////////////////////////
+
+// lecture 6: Top level awaits
+// in ES2020 -> there is the change that we can use await keyword outside the async function at least in modules. This await is called top level await.
+// usage of await is like this with an api call
+// lets consider the api from json placeholder which is about the post.
+// console.log('start fetching data')
+// const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+// const data = await res.json();
+// console.log(data) 
+// console.log('end fetching data') 
+// but here the await will block the execution context till the data is fetched and when the data is fetched.
+
+// Lets consider the a kind of real world looking implementation using this await.
+// consider the async function which returns an object containing the data of last post.
+const getLastPost = async function(){
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await res.json();
+    console.log(data) 
+    return { title: data.at(-1).title, text: data.at(-1).text}
+}
+const lastPost = getLastPost()
+console.log(lastPost); // but here instead of last value the async function will return the promise.
+
+// so to get the value out of it we will use the then method
+lastPost.then(last=>console.log(last))
+// Now this thing has returned the last post in the object but it is not the cleaner. The more cleaner way is to use await over there
+
+const lastPost2 = await getLastPost();
+console.log(lastPost2) // this variable contain the object with last post
+
+// if we are importing a module which has type level await then this module will block the execution of the module in which it is importing.
+
+// so top level await is useful but it should be use with great care 
+
+///////////////////////////////
