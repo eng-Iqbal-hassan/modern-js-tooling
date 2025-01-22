@@ -1,8 +1,8 @@
 // import { addToCart, totalPrice as price, tq } from "./shoppingCart.js";
 // we can import all the variable in a single go by the following syntax
-import * as shoppingCart from './shoppingCart.js'
+// import * as shoppingCart from './shoppingCart.js'
 // in this syntax, the object with name shoppingCart is created which contains all the variables of the imported file
-import add from './shoppingCart2.js'
+// import add from './shoppingCart2.js'
 // this is default export and we can export it by any name and it is without curly braces
 
 // Lecture 3: 
@@ -62,7 +62,7 @@ import add from './shoppingCart2.js'
 ///////////////////////////////
 
 // Lecture 5: Exporting and importing in ES6
-console.log('importing module')
+// console.log('importing module')
 // import './shoppingCart.js'; // this is the import of the module
 // import { addToCart } from "./shoppingCart.js"; // this is the import of variable from module
 // the error i face that we can not use the import statement outside the module 
@@ -75,11 +75,11 @@ console.log('importing module')
 // addToCart('bread',5);
 // console.log(`total price is ${price} and total quantity is ${tq}`)
 // we can change the name of variable imported from other file as mentioned above. even this thing can be done in exported file.
-shoppingCart.addToCart('bread',5);
-console.log(shoppingCart.totalPrice);
-console.log('cart',shoppingCart.cart) // we have exported cart where it is just an empty array if the export is just the copy of import then in the console there is only the empty array but now it is giving me one object with product bread and quantity 5 properties.
+// shoppingCart.addToCart('bread',5);
+// console.log(shoppingCart.totalPrice);
+// console.log('cart',shoppingCart.cart) // we have exported cart where it is just an empty array if the export is just the copy of import then in the console there is only the empty array but now it is giving me one object with product bread and quantity 5 properties.
 
-add('garlic',10) // this result coming from default export.
+// add('garlic',10) // this result coming from default export.
 // imports are not the copy of export but it is the live connection with export file
 
 ///////////////////////////////
@@ -97,24 +97,63 @@ add('garlic',10) // this result coming from default export.
 
 // Lets consider the a kind of real world looking implementation using this await.
 // consider the async function which returns an object containing the data of last post.
-const getLastPost = async function(){
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-    const data = await res.json();
-    console.log(data) 
-    return { title: data.at(-1).title, text: data.at(-1).text}
-}
-const lastPost = getLastPost()
-console.log(lastPost); // but here instead of last value the async function will return the promise.
+// const getLastPost = async function(){
+//     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+//     const data = await res.json();
+//     console.log(data) 
+//     return { title: data.at(-1).title, text: data.at(-1).text}
+// }
+// const lastPost = getLastPost()
+// console.log(lastPost); // but here instead of last value the async function will return the promise.
 
 // so to get the value out of it we will use the then method
-lastPost.then(last=>console.log(last))
+// lastPost.then(last=>console.log(last))
 // Now this thing has returned the last post in the object but it is not the cleaner. The more cleaner way is to use await over there
 
-const lastPost2 = await getLastPost();
-console.log(lastPost2) // this variable contain the object with last post
+// const lastPost2 = await getLastPost();
+// console.log(lastPost2) // this variable contain the object with last post
 
 // if we are importing a module which has type level await then this module will block the execution of the module in which it is importing.
 
 // so top level await is useful but it should be use with great care 
+
+///////////////////////////////
+
+// Lecture 7: Modules pattern
+// now we will see how use the module pattern
+// the main goal of module pattern is to encapsulate functionality to have private data and to expose to a public API.
+// And the best of achieving that is to use functions because function gives us the private data by default and allows us to return the values and it will become our public API.
+// so lets make the IIFE, which will immidiatly be called when the page is loaded. The only purpose to make this function is to create a scope and return data just once.
+
+const shoppingCart = (function(){
+    const cart = [];
+    const shoppingCost = 10;
+    const totalPrice = 237;
+    const totalQuantity = 23;
+    const addToCart = function(product,quantity) {
+        cart.push({product,quantity});
+        console.log(`${quantity} ${product} added to cart and shipping cost is ${shoppingCost}`)
+    }
+    const orderStock = function(product,quantity) {
+        cart.push({product,quantity});
+        console.log(`${quantity} ${product} ordered from supplier`)
+    }
+    return {
+        addToCart,
+        cart,
+        totalPrice,
+        totalQuantity
+    }
+})()
+// if we are not storing this function anywhere then it will disappear very soon so we are storing it in a variable.
+shoppingCart.addToCart('bread',2);
+shoppingCart.addToCart('pizza',2);
+console.log(shoppingCart);
+// so the object which the function is returning is stored in the variable and then the stuff like mention above is done.
+// the variable which is make private is not accessible like
+console.log(shoppingCart.shoppingCost) // its answer is undefine because this property is nit added in the return statement
+// further as the IIFE is run at very start then how it is possible the execution of all the stuff and the increment of object inside the cart array
+// all this happen due to closure because closure allows a function to have the access of all the variables that were present at its birthplace.
+// this cart is not the inside of addToCart function but this cart is the variable declared above so we addToCart have the access of all the variable of this IIFE function like inside function i have added shippingCost. This is showing in the result of addToCart function even we have not added this in return. 
 
 ///////////////////////////////
