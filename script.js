@@ -125,35 +125,35 @@
 // And the best of achieving that is to use functions because function gives us the private data by default and allows us to return the values and it will become our public API.
 // so lets make the IIFE, which will immidiatly be called when the page is loaded. The only purpose to make this function is to create a scope and return data just once.
 
-const shoppingCart = (function () {
-  const cart = [];
-  const shoppingCost = 10;
-  const totalPrice = 237;
-  const totalQuantity = 23;
-  const addToCart = function (product, quantity) {
-    cart.push({ product, quantity });
-    console.log(
-      `${quantity} ${product} added to cart and shipping cost is ${shoppingCost}`
-    );
-  };
-  const orderStock = function (product, quantity) {
-    cart.push({ product, quantity });
-    console.log(`${quantity} ${product} ordered from supplier`);
-  };
-  return {
-    addToCart,
-    cart,
-    totalPrice,
-    totalQuantity,
-  };
-})();
+// const shoppingCart = (function () {
+//   const cart = [];
+//   const shoppingCost = 10;
+//   const totalPrice = 237;
+//   const totalQuantity = 23;
+//   const addToCart = function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(
+//       `${quantity} ${product} added to cart and shipping cost is ${shoppingCost}`
+//     );
+//   };
+//   const orderStock = function (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(`${quantity} ${product} ordered from supplier`);
+//   };
+//   return {
+//     addToCart,
+//     cart,
+//     totalPrice,
+//     totalQuantity,
+//   };
+// })();
 // if we are not storing this function anywhere then it will disappear very soon so we are storing it in a variable.
-shoppingCart.addToCart('bread', 2);
-shoppingCart.addToCart('pizza', 2);
-console.log(shoppingCart);
+// shoppingCart.addToCart('bread', 2);
+// shoppingCart.addToCart('pizza', 2);
+// console.log(shoppingCart);
 // so the object which the function is returning is stored in the variable and then the stuff like mention above is done.
 // the variable which is make private is not accessible like
-console.log(shoppingCart.shoppingCost); // its answer is undefine because this property is not added in the return statement
+// console.log(shoppingCart.shoppingCost); // its answer is undefine because this property is not added in the return statement
 // further as the IIFE is run at very start then how it is possible the execution of all the stuff and the increment of object inside the cart array
 // all this happen due to closure because closure allows a function to have the access of all the variables that were present at its birthplace.
 // this cart is not the inside of addToCart function but this cart is the variable declared above so we addToCart have the access of all the variable of this IIFE function like inside function i have added shippingCost. This is showing in the result of addToCart function even we have not added this in return.
@@ -201,4 +201,59 @@ console.log(shoppingCart.shoppingCost); // its answer is undefine because this p
 // so rmdir will delete the empty folder only
 // mkdir for creating the folder and rmdir for deleting the folder.
 
+///////////////////////////////
+
+// Lecture 10: Introduction to npm
+// npm is both a software on our computer and a package repository.
+// Before the npm, we use to add script file of a package in our html page like we did in our mapty project for leaflet library.
+// Why we need npm? The reasons are below
+// (1): Firstly, it does not make sense that html is loading all the js that are really messy.
+// (2): Sometime we download a library in our computer and then add its script in html, so if the new version then we have to download the new version and then change the name of the script. So it is tough to keep the track of updated packages
+// (3): The third reason is that before npm we did not have any repository that includes all the packages that we might need
+// so we need to manage our dependencies in better and modern way. so for this reason npm is necessary.
+// so in order to use the npm, first check if it is installed or not by command npm -v
+// if it returns some number then it is installed, if it gives some error then install node
+// the provided npm version should ve greater than 6
+// so to use npm, we need to initialize the npm in our project by command npm init
+// it will ask some questions we just hit return saying that we are accepting the default answers, then at the end it will create the package.json file
+// now we have added the leaflet in our project by npm
+// so we run the command npm install leaflet
+// so it gives us two things. First, in package.json file dependencies are added with with leaflet and second is that node_modules have the code of leaflet in it which contains everything about this library which can be used.
+// And we keep downloading more modules their code will start adding in node modules.
+// And if i wanted to use it, it will not be easy to use without module bundler, the reason is that library is using commonJs module
+// we can not directly import it in our project and we can do it we use a module bundler. we are discussing how to do it now
+// one of the install and import of library that we are going to do is the lodash.
+// lodash is usually a collection of tons of functions for arrays, objects, functions, date and time.
+// these functions could or should be added in lodash but they are not added and we are doing that here in lodash.
+// we are installing the es version of this library and not the simple version so the package will be of es-version
+// so in node module, inside lodash folder we get so many methods in files and for one method there is one file.
+// now let say that we are adding clonedeep in here in our js
+// as these js file are default export so we can import with any name and without curly braces but over here we are adding with the same name
+
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// why we have import cloneDeep
+// the reason is that we have talk about when we were copying the nested object
+// so it is hard to copy the nested object. So let say create one object
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+// so here the state is the object which contains nested objects.
+// we copy the object before by using Object.assign method and the syntax be like
+const stateClone = Object.assign({}, state);
+console.log('clone with js', stateClone);
+const stateDeepClone = cloneDeep(state);
+console.log('clone from lodash', stateDeepClone);
+state.user.loggedIn = false;
+// so it is observed that if any value in the state is changed then this value is also changed in its clone object.
+// now consider do the same thing with the deepClone function that we have imported.
+// it is being observed that clone from lodash contains loggedIn true
+// but if we do lodash clone after the value is changed then loggedIn value in it will be false.
+// but in js clone, loggedIn value will be false no matter it is clone before or after changing the value.
+// so when we are copying our project to paste or add somewhere else or we are pushing our code to the git then there is no need to add or copy node_module folder because this code will come up from npm
+// so if we have let say 20 dependencies, do we install one by one. The answer is no. we just add npm install without any package. Then it will look into package.json file and here look into the dependencies and will install all and add all the code stuff in node_module on its own in one go.
 ///////////////////////////////
