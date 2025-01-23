@@ -5,7 +5,7 @@
 // import add from './shoppingCart2.js'
 // this is default export and we can export it by any name and it is without curly braces
 
-// Lecture 3: 
+// Lecture 3:
 
 // Back in the days, we develop the project by writing one large script or script in multiple files. But now, we develop project in terms of modules and these modules can share data between them and we make our code more maintainable and organized.
 // One great thing about the module is that we can include third party module into our code and there are thousand of open source modules which are called packages that developer shares in npm repository. These packages are free to use.
@@ -19,7 +19,7 @@
 // (2): But module is not executed by the old browsers so in next step we do TRANSPILING /POLYFILING which convert all the syntax back to the old ES5 syntax so even the older browsers can execute it and this thing is done using a tool called BABEL.
 // we do not do these steps on our own but we use tool for this build process and most common tools are webpack and Parcels.
 // these are called JS bundlers as they takes our raw code and convert into js bundles
-// these development tools are also available in npm and like the package we add in our project, we will simply download and manage tools using npm 
+// these development tools are also available in npm and like the package we add in our project, we will simply download and manage tools using npm
 
 ///////////////////////////////
 
@@ -42,7 +42,7 @@
 
 // Javascript ES6 Modules: Modules store in file, exactly one module per file.
 // Script is also a file. So what is the difference between ES6 Modules and Js files
-// One difference is that top-level variables are scoped to module and one can access these variables only by importing them in other modules but on the other hand in scripts top-level variables are global scope and this thing can arise problem like global namespace pollution when developers try to declare different values by same variable name 
+// One difference is that top-level variables are scoped to module and one can access these variables only by importing them in other modules but on the other hand in scripts top-level variables are global scope and this thing can arise problem like global namespace pollution when developers try to declare different values by same variable name
 // default mode of the module is 'script mode' while default mode for script is 'sloppy mode'
 // top level this keyword is undefine in module but in script file it points to the window.
 // in modules we can import and export values but in script files we can not do this thing.
@@ -53,11 +53,11 @@
 // How modules actually import the other modules behind the scene.
 // let say we are importing the rent value from dumb.js module.
 // So as always when a piece of code is executed the first step is the parsing the code.
-// Parsing means just read the code before executing it and this is the point where whole process of importing the value happens in an asynchronous way before main code execution. 
+// Parsing means just read the code before executing it and this is the point where whole process of importing the value happens in an asynchronous way before main code execution.
 // so if we import the value inside a function then function needs to be execute first before importing the value so this importing or exporting will not happen in an asynchronous way.
 // As these modules are imported in module say in index.js so at first these modules are downloaded in this module.
-// when these modules are downloaded then these modules are linked to their exports file. 
-// then the code of these files is executed. and so the process of importing the module is finished 
+// when these modules are downloaded then these modules are linked to their exports file.
+// then the code of these files is executed. and so the process of importing the module is finished
 
 ///////////////////////////////
 
@@ -65,7 +65,7 @@
 // console.log('importing module')
 // import './shoppingCart.js'; // this is the import of the module
 // import { addToCart } from "./shoppingCart.js"; // this is the import of variable from module
-// the error i face that we can not use the import statement outside the module 
+// the error i face that we can not use the import statement outside the module
 // so to achieve this thing we use type=module where the script is achieved in html
 // it has been observed that module code is run before any other code.
 // import code is executed first even i have written it after.
@@ -91,8 +91,8 @@
 // console.log('start fetching data')
 // const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 // const data = await res.json();
-// console.log(data) 
-// console.log('end fetching data') 
+// console.log(data)
+// console.log('end fetching data')
 // but here the await will block the execution context till the data is fetched and when the data is fetched.
 
 // Lets consider the a kind of real world looking implementation using this await.
@@ -100,7 +100,7 @@
 // const getLastPost = async function(){
 //     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 //     const data = await res.json();
-//     console.log(data) 
+//     console.log(data)
 //     return { title: data.at(-1).title, text: data.at(-1).text}
 // }
 // const lastPost = getLastPost()
@@ -115,7 +115,7 @@
 
 // if we are importing a module which has type level await then this module will block the execution of the module in which it is importing.
 
-// so top level await is useful but it should be use with great care 
+// so top level await is useful but it should be use with great care
 
 ///////////////////////////////
 
@@ -125,35 +125,60 @@
 // And the best of achieving that is to use functions because function gives us the private data by default and allows us to return the values and it will become our public API.
 // so lets make the IIFE, which will immidiatly be called when the page is loaded. The only purpose to make this function is to create a scope and return data just once.
 
-const shoppingCart = (function(){
-    const cart = [];
-    const shoppingCost = 10;
-    const totalPrice = 237;
-    const totalQuantity = 23;
-    const addToCart = function(product,quantity) {
-        cart.push({product,quantity});
-        console.log(`${quantity} ${product} added to cart and shipping cost is ${shoppingCost}`)
-    }
-    const orderStock = function(product,quantity) {
-        cart.push({product,quantity});
-        console.log(`${quantity} ${product} ordered from supplier`)
-    }
-    return {
-        addToCart,
-        cart,
-        totalPrice,
-        totalQuantity
-    }
-})()
+const shoppingCart = (function () {
+  const cart = [];
+  const shoppingCost = 10;
+  const totalPrice = 237;
+  const totalQuantity = 23;
+  const addToCart = function (product, quantity) {
+    cart.push({ product, quantity });
+    console.log(
+      `${quantity} ${product} added to cart and shipping cost is ${shoppingCost}`
+    );
+  };
+  const orderStock = function (product, quantity) {
+    cart.push({ product, quantity });
+    console.log(`${quantity} ${product} ordered from supplier`);
+  };
+  return {
+    addToCart,
+    cart,
+    totalPrice,
+    totalQuantity,
+  };
+})();
 // if we are not storing this function anywhere then it will disappear very soon so we are storing it in a variable.
-shoppingCart.addToCart('bread',2);
-shoppingCart.addToCart('pizza',2);
+shoppingCart.addToCart('bread', 2);
+shoppingCart.addToCart('pizza', 2);
 console.log(shoppingCart);
 // so the object which the function is returning is stored in the variable and then the stuff like mention above is done.
 // the variable which is make private is not accessible like
-console.log(shoppingCart.shoppingCost) // its answer is undefine because this property is nit added in the return statement
+console.log(shoppingCart.shoppingCost); // its answer is undefine because this property is not added in the return statement
 // further as the IIFE is run at very start then how it is possible the execution of all the stuff and the increment of object inside the cart array
 // all this happen due to closure because closure allows a function to have the access of all the variables that were present at its birthplace.
-// this cart is not the inside of addToCart function but this cart is the variable declared above so we addToCart have the access of all the variable of this IIFE function like inside function i have added shippingCost. This is showing in the result of addToCart function even we have not added this in return. 
+// this cart is not the inside of addToCart function but this cart is the variable declared above so we addToCart have the access of all the variable of this IIFE function like inside function i have added shippingCost. This is showing in the result of addToCart function even we have not added this in return.
 
+///////////////////////////////
+
+// Lecture 8: Other module system
+// there are other module system apart from native module and module pattern
+// these modules are AMD modules and commonJs module which were used in past
+// commonJs module are commonly used in node and still present with all of its existence.
+// ES modules are commonly running in node.js and node.js is the way of running js on a web server outside the browser
+// at start npm was for node only and then it became the standalone repository for the whole Js world so it is important to take a look on commonJs Module.
+// the code for node with commonJs module will look like as i given below
+
+// export
+// export.addToCart = (product, quantity) {
+//     cart.push({ product, quantity });
+//     console.log(
+//       `${quantity} ${product} added to cart and shipping cost is ${shoppingCost}`
+//     );
+//   };
+
+// import
+// const { addToCart } = require('./shoppingCart.js')
+// this code will not run over there but it is the stuff of node. so these modules are present for js but this thing is in the node.
+// in some time in future ES6 will replace the whole module system
+// Rest of the section is about how to use third party package from npm.
 ///////////////////////////////
