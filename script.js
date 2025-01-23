@@ -181,4 +181,24 @@ console.log(shoppingCart.shoppingCost); // its answer is undefine because this p
 // this code will not run over there but it is the stuff of node. so these modules are present for js but this thing is in the node.
 // in some time in future ES6 will replace the whole module system
 // Rest of the section is about how to use third party package from npm.
+
+///////////////////////////////
+
+// Lecture 9: A brief introduction to command line
+// in terminal we are always on the folder in which vs code is running.
+// now we can make different commands to get different things
+// like we do ls and then all the files and folder in this folder are shown
+// cd is the command with which we can change the directory and we can move around. like cd .. we move up, so in the folder where this folder is created
+// so by cd .. i have moved in the folder structure a step up and if i want to see its child again i press ls
+// so if i want to move to any directory from here we simply write cd and then directory name
+// clear is the command by which i can clear my terminal and i am at top level
+// i can make new folder in my project by command line which is -> mkdir folder_name
+// with cd test i have moved to that folder and now i can create files in this folder by touch
+// arrow key up to see the previous commands and arrow key down to the next commands from a command
+// we can add multiple files by just writing the names of the file by space in front of touch keyword
+// i can remove one or multiple files at a time by rm keyword
+// i can move the file from one folder to the other by mv -> like by mv bankist.js ../ command i have moved this file from test to parent folder
+// so rmdir will delete the empty folder only
+// mkdir for creating the folder and rmdir for deleting the folder.
+
 ///////////////////////////////
