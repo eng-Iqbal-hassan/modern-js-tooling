@@ -867,6 +867,10 @@ if (module.hot) module.hot.accept();
  // there was es-module added in my code and for parcel it was given the shortened path. This thing is suitable for es module and also for commonJs module like leaflet module.
  // even if we write some import of a module which is not installed, then parcel will automatically installed it.
  // we can also run npm script to run parcel. Basically in script we make a script which contains the code parcel index.html and then in command line we run npm run and then script name.
+ // when we are done with developing our project, then this is the time to build the final bundle which will eliminate all the dead code and all that stuff.
+ // this thing is happen by other parcel command which is in the script. parcel build index.html. This is by the name of build then the command to run is npm run build
+ // we can add parcel globally by the command npm i parcel -g and then it will be added globally and can be used in all directory and it will run by direct command line and we will not use any intermediate command like npm or npx.
+ // But it is preferred to install parcel locally so that one can use the updated version of the parcel.
  ///////////////////////////////
 
 },{"lodash-es":"bXNwz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bXNwz":[function(require,module,exports,__globalThis) {
