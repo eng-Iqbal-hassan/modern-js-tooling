@@ -230,10 +230,13 @@
 // now let say that we are adding clonedeep in here in our js
 // as these js file are default export so we can import with any name and without curly braces but over here we are adding with the same name
 
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 // why we have import cloneDeep
 // the reason is that we have talk about when we were copying the nested object
 // so it is hard to copy the nested object. So let say create one object
+
+import cloneDeep from 'lodash-es';
+// in presence of parcel then instead of using the long path we have used just lodash-es and script will understand on its own what is the exact thing to add in the script
 
 const state = {
   cart: [
@@ -256,4 +259,43 @@ state.user.loggedIn = false;
 // but in js clone, loggedIn value will be false no matter it is clone before or after changing the value.
 // so when we are copying our project to paste or add somewhere else or we are pushing our code to the git then there is no need to add or copy node_module folder because this code will come up from npm
 // so if we have let say 20 dependencies, do we install one by one. The answer is no. we just add npm install without any package. Then it will look into package.json file and here look into the dependencies and will install all and add all the code stuff in node_module on its own in one go.
+
+///////////////////////////////
+
+// Lecture 11: Bundling with Parcel and NPM scripts
+// we use parcel as module bundler in this course.
+// Parcel is also just another tool which is also available in npm.
+// so we will install parcel by npm. But it is a different dependency and we install it by the command npm i parcel --save-dev
+// so this is dev dependency, and this is a kind of dependency which is required to built our application and not to add in our code.
+// thats why this parcel appears in new field which is devDependencies.
+// we can not get result of running command parcel index.html in terminal. The reason is that this package is basically installed locally
+// There is also the global installation of parcel but we will discuss it later
+// Basically when we are running command parcel index.html, then we want to bundle all the js present in the index.html
+// so one of the way of running this command is to write the command like npx parcel index.html
+// npx is an application built in the npm
+// here index.html is the entry point of the parcel because there is script files added which we want to bundle up.
+// Parcel then actually start a new development server
+// so beside bundling its also provide server
+// the only difference between servers coming from go-live and parcel server is that both are running on different ports and there is raw IP address in go-live server but in parcel server there is just name.
+// other command to install parcel if there is the error is sudo npm i parcel
+// if still error occurs, then you can install a specific version let say the version is 1.12.4, then the command line to install this version is npm i parcel@1.12.4
+// there is some error occurs then you have to uninstall the parcel by npm uninstall parcel, then install the specific version.
+// we have seen that this parcel creates the new folder dist over there which contains the html file in which a script file is added which is also in dist folder and this script is bundled script.
+// The thing which is observed that whenever we reload the page, then server built again despite the changes are made or not. so the thing should be that page is reloaded, then the parcel server should built if the changes do occur otherwise not.
+// we can add hot module reloading in our code that means that if we make change in any of the module then it will trigger the re-built.
+
+if (module.hot) {
+  module.hot.accept();
+}
+// this is the code which is understand by the parcel.
+// we have shortened the lodash path and all this thing is understood because of parcel.
+// this thing is doable for all kind of files even html, css or even the images.
+// there was es-module added in my code and for parcel it was given the shortened path. This thing is suitable for es module and also for commonJs module like leaflet module.
+// even if we write some import of a module which is not installed, then parcel will automatically installed it.
+// we can also run npm script to run parcel. Basically in script we make a script which contains the code parcel index.html and then in command line we run npm run and then script name.
+// when we are done with developing our project, then this is the time to build the final bundle which will eliminate all the dead code and all that stuff.
+// this thing is happen by other parcel command which is in the script. parcel build index.html. This is by the name of build then the command to run is npm run build
+// we can add parcel globally by the command npm i parcel -g and then it will be added globally and can be used in all directory and it will run by direct command line and we will not use any intermediate command like npm or npx.
+// But it is preferred to install parcel locally so that one can use the updated version of the parcel.
+
 ///////////////////////////////
