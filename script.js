@@ -230,12 +230,12 @@
 // now let say that we are adding clonedeep in here in our js
 // as these js file are default export so we can import with any name and without curly braces but over here we are adding with the same name
 
-// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
 // why we have import cloneDeep
 // the reason is that we have talk about when we were copying the nested object
 // so it is hard to copy the nested object. So let say create one object
 
-import cloneDeep from 'lodash-es';
+// import cloneDeep from 'lodash-es';
 // in presence of parcel then instead of using the long path we have used just lodash-es and script will understand on its own what is the exact thing to add in the script
 
 const state = {
@@ -250,6 +250,7 @@ const state = {
 const stateClone = Object.assign({}, state);
 console.log('clone with js', stateClone);
 const stateDeepClone = cloneDeep(state);
+console.log(stateDeepClone);
 console.log('clone from lodash', stateDeepClone);
 state.user.loggedIn = false;
 // so it is observed that if any value in the state is changed then this value is also changed in its clone object.
@@ -297,5 +298,46 @@ if (module.hot) {
 // this thing is happen by other parcel command which is in the script. parcel build index.html. This is by the name of build then the command to run is npm run build
 // we can add parcel globally by the command npm i parcel -g and then it will be added globally and can be used in all directory and it will run by direct command line and we will not use any intermediate command like npm or npx.
 // But it is preferred to install parcel locally so that one can use the updated version of the parcel.
+
+///////////////////////////////
+
+// Lecture 12: Configuring babel and poly-filling
+// After activating bundling, we need to configure BABEL to transpile our modern code to ES5 code.
+// Even after the long time of ES6, there are some user who has run the old browsers like window 7 or window XP and we have to keep in mind for all kind of user and still this concept of BABEL and module bundling are important.
+// Parcel automatically use the BABEL to transpile their code and we just need to configure it just.
+// Babel is a js compiler
+// Babel works with plugin and presets.
+// so in the documentation and in th plugin we come to know that we can transpile any single feature using plugin back to ES5 and remaining all other in ES6 like we are transpiling only arrow function back to ES5 but we are keeping let and const declaration as it is in ES6.
+// so this thing does not make much sense and we transpile everything at the same time se we mainly focus on presets.
+// so a preset is the bunch of plugin bundles together.
+// and this preset will automatically choose which feature of js needs to compile
+// Now let's write some code which are class field and see how this class fields are compiled.
+class Person {
+  greeting = 'Hey';
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting} ${this.name}`);
+  }
+}
+const jonas = new Person('Jonas');
+//Before this class feature was not the part of babel plugin and we need to add this feature as the time before it was the part of experimental feature but now it is a babel feature and we need not to add it manually.
+// ok there are the features which are converted from ES6 to ES5 but there are some new features like promises and some new array methods like find method there syntax has been changed according to ES5 like if they are written with arrow function, then in transpiled file they are written with regular functions but they are still promises and methods with exact name they are not transpiled in the way which we want so this thing is resolved using poly-filling.
+// so we need to poly-fill the new features of js
+// this thing is done by other library which is core-js
+// this library is installed by using the command -> npm i core-js
+// and then import it in the file be like
+import 'core-js/stable';
+// after poly-filling when we see the transpiled code they are still find method and promise synatx in the exact same way as it was before but the difference is that now it in array prototype, all new methods are added and a global variable with the name of promise is added
+// It also has seen that the new methods which we are not using in our code, their declaration is added in the transpiled file.
+// so if we do not want to add everything then we can add any one of the new feature if this thing is really matter
+// like we want to add find method of array -> then the import will look like this:
+// import 'core-js/stable/array/find';
+// this will add find method only.
+// the same thing can be done for the promise like this:
+// import 'core-js/stable/promise';
+
+// there is one feature which is not polyfilled in this way and we need to install one more package.
+// this feature is asynchronous function and for it to be polyfilled we add the package which is regenerator-runtime by the command -> npm i regenerator-runtime and this thing is added in the code by using import like this
+import 'regenerator-runtime/runtime';
 
 ///////////////////////////////
