@@ -341,3 +341,40 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 ///////////////////////////////
+
+// Lecture 13: Review writing clean and modern js
+// lets discuss about the best practices while writing the code
+// (1): Readable code:
+//  (a): Write the code which others can understand
+//  (b): Write the code which you can understand after one year or after sometime.
+//  (c): Avoid too 'clever' and overcomplicated solutions -> it will create confusion in your code
+//  (d): Use descriptive variable name: WHAT THEY CONTAIN
+//  (e): Use descriptive function name: WHAT THEY DO
+// (2): General:
+//  (a): Use DRY principle (refactor your code)
+//  (b): Don't pollute global namespace, encapsulate instead.
+//  (c): Don't use var , use const and if the variable needs to change then use let.
+//  (d): Use strong type checks(===,!==)
+// (3): Functions:
+//  (a): Generally functions should do only one thing.
+//  (b): Do not use parameters more than 3
+//  (c): Return the same data type which is receiving
+//  (d): Use default params whenever possible.
+//  (e): Use arrow functions when they make code more readable.
+// some people have different opinion. Some use arrow functions all the time and some never use them all. So we should be the intermediate chooser we should use the both when they are better to use. One best example of using arrow functions is to use them in call-back of array methods.
+// (4): OOP
+//  (a): Use ES6 classes
+//  (b): Encapsulate data and do not mutate it outside
+//  (c): Use chaining method
+//  (d): Do not use arrow functions as method in in regular objects. Because by doing this thing you will not have the access of THIS keyword of object in the function. So never use arrow function as methods in object even if you are not using this keyword. Because when you will have the habit of using regular function then you will never hit any mistake.
+// (5): Avoid nested code
+//  (a): Use early returns (guard clauses)
+//  (b): Use ternary(conditional) or logical operator instead of if
+//  (c): Use multiple if instead of if/else-if
+//  (d): Avoid for loops -> Use array methods instead.
+//  (e): Avoid call-back asynchronous APIs -> Don't call api by then method -> it will give you the nested code
+// (6): Asynchronous code
+//  (a): Consume promises with async-await for best readability
+//  (b): Whenever possible, run promises in parallel(Promise.all)
+//  (c): Handle errors and promise rejections.
+///////////////////////////////
