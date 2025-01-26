@@ -376,5 +376,5 @@ import 'regenerator-runtime/runtime';
 // (6): Asynchronous code
 //  (a): Consume promises with async-await for best readability
 //  (b): Whenever possible, run promises in parallel(Promise.all)
-//  (c): Handle errors and promise rejections.
+//  (c): Handle errors and promise rejections.git
 ///////////////////////////////

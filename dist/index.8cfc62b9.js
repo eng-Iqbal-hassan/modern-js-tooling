@@ -837,7 +837,7 @@ var _webImmediateJs = require("core-js/modules/web.immediate.js"); /////////////
  // (6): Asynchronous code
  //  (a): Consume promises with async-await for best readability
  //  (b): Whenever possible, run promises in parallel(Promise.all)
- //  (c): Handle errors and promise rejections.
+ //  (c): Handle errors and promise rejections.git
  ///////////////////////////////
 var _cloneDeepJs = require("./node_modules/lodash-es/cloneDeep.js");
 var _cloneDeepJsDefault = parcelHelpers.interopDefault(_cloneDeepJs);
