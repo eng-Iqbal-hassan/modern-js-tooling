@@ -385,5 +385,36 @@ import 'regenerator-runtime/runtime';
 // second we have changed the var to const and let
 // if(!user) user='jonas' -> this thing is changed to default value assignment in param
 // if else statement is changed to ternary operator to avoid nested code
-//
+
+///////////////////////////////
+
+// Lecture 15: Declarative and functional javascript principals:
+// there are two fundamentally different ways of writing code (imperative and declarative)
+// in imperative way programmer tells computer how to do a thing.
+// we explain each step to follow to achieve the specific result
+// consider the example of duplicating each number in the arr
+const arr = [1, 2, 3, 4];
+const double = [];
+for (let i = 0; i < arr.length; i++) double[i] = arr[i] * 2;
+// in this example we have explain all the steps to get the array whose entries are two times of the entry.
+// While in declarative way -> we tell computer what to do
+// we simply describe the way computer should achieve the result and computer does it on its own.
+// the above code can be achieved in the imperative way like this
+const doubled = arr.map(n => n * 2);
+// declarative paradigm is a really big and important paradigm of programming language which has given rise to sub-paradigm which is called functional programming.
+// Functional programming is declarative paradigm
+// Based on the idea of writing software by combining many pure functions, avoiding side-effects and mutating data.
+// Side effects: Modification (mutation) of any data outside of the function (mutating external variables, logging to console or writing to DOM)
+// Pure Functions: Function without side-effects. Does not depend on external variables. Given the same input, always return same input
+// Immutability: State(data) is never modified. Instead state is copied and copy is mutated and returned.
+// Functional Programming Techniques:
+// Try to avoid data mutation
+// Use built-in methods that do not produce side-effects
+// Do data transformation with the methods like map, reduce and filters
+// Try to avoid side-effects in the function. This is not possible as always
+// Declarative syntax:
+// Use Array and object de-structuring.
+// Use the spread operator
+// Use the ternary(conditional) operator.
+// Use the template literals
 ///////////////////////////////
