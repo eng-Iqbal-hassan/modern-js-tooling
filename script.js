@@ -377,4 +377,13 @@ import 'regenerator-runtime/runtime';
 //  (a): Consume promises with async-await for best readability
 //  (b): Whenever possible, run promises in parallel(Promise.all)
 //  (c): Handle errors and promise rejections.git
+
+///////////////////////////////
+
+// Lecture 18: Fix some bad code
+// first of all we fix the name which gives more sense
+// second we have changed the var to const and let
+// if(!user) user='jonas' -> this thing is changed to default value assignment in param
+// if else statement is changed to ternary operator to avoid nested code
+//
 ///////////////////////////////
