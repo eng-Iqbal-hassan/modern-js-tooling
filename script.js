@@ -417,4 +417,22 @@ const doubled = arr.map(n => n * 2);
 // Use the spread operator
 // Use the ternary(conditional) operator.
 // Use the template literals
+
+///////////////////////////////
+
+// Lecture 16:
+// A way to make data structure or in other words array or objects immutable is by calling the function object.freeze and in this function we just pass-in object which we want to make immutable.
+// no more property will be added to these objects
+// but this thing does freezing at top level if the object is inside the freeze object then this object can be mutated.
+// The thing which we have done is we make our budget array and spendingLimit objects immutable by Object.freeze
+// I got the error because of addExpense function and the error is that object is not extensible.
+// The reason is that addExpense function is trying to mutate the budget array because of its budget.push method.
+// In other words this function has side effect, which means that something outside the function is mutated or the function is returning something else. as our params are different and we have something else return by our function.
+// The function which has side effect is called impure function
+// In its solution, first of all we should pass all of the data that the function depends on, into the function
+// so in solution, create a copy and then return the copy
+// Now in the function, we pass in variable called state and limits.
+// state for the budget array and limits for the spending limits
+//
+
 ///////////////////////////////
